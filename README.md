@@ -24,7 +24,7 @@ nm-applet &
 #Speeding up system loading
 systemctl disable ModemManager.service
 systemctl disable NetworkManager-wait-online.service
-systemctl disable lvm2-monitor
+systemctl disable lvm2-monitor.service
 systemctl disable avahi-daemon.service
 
 exit 0;
@@ -51,7 +51,7 @@ net_applet &
 #Re-disabling unnecessary content
 systemctl disable ModemManager.service
 systemctl disable NetworkManager-wait-online.service
-systemctl disable lvm2-monitor
+systemctl disable lvm2-monitor.service
 systemctl disable avahi-daemon.service
 
 exit 0;
