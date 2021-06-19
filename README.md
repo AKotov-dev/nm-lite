@@ -1,7 +1,7 @@
 # nm-lite
 The switch `network/net_applet` to `NetworkManager/nm-applet` (after installation) and back (during removal) + disable unnecessary services to speed up system loading.
 
-Переключатель `network/net_applet` на `NetworkManager/nm-апплет` (после установки) и обратно (после удаления) + отключение ненужных служб для ускорения загрузки системы.
+Переключатель `network/net_applet` на `NetworkManager/nm-applet` (после установки) и обратно (после удаления) + отключение ненужных служб для ускорения загрузки системы.
 
 %post
 --
