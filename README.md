@@ -1,7 +1,12 @@
 # nm-lite
 The switch `network/net_applet` to `NetworkManager/nm-applet` (after installation) and back (after removal) + disable unnecessary services to speed up system loading.
 
+Note: To display the nm-applet icon in KDE and GNOME, you need to comment out a line in the file /etc/xdg/autostart/nm-applet.desktop: `#NotShowIn=KDE;GNOME;`
+
+
 Переключатель `network/net_applet` на `NetworkManager/nm-applet` (после установки) и обратно (после удаления) + отключение ненужных служб для ускорения загрузки системы.
+
+Примечание: Для отображения значка nm-applet в KDE и GNOME нужно закомментировать строку в файле /etc/xdg/autostart/nm-applet.desktop: `#NotShowIn=KDE;GNOME;`
 
 %post
 --
