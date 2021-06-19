@@ -97,13 +97,13 @@ deb=0
 22=exit 0;
 
 [URL32]
-url32=111
+url32=
 
 [URL64]
 url64=
 
 [PROGRAMNAME]
-programname=111
+programname=
 
 [DEVTOOL]
 devtool=Shell
