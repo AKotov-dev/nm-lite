@@ -7,7 +7,7 @@ The switch `network/net_applet` to `NetworkManager/nm-applet` (after installatio
 --
 ```#!/bin/bash
 
-#Disable network.service & net_applet, Enable NetworkManager light
+#Disable network.service & net_applet, Enable NetworkManager lite
 killall -KILL net_applet nm-applet
 systemctl stop network.service
 systemctl disable network.service
