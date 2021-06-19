@@ -48,7 +48,7 @@ systemctl enable network.service
 systemctl start network.service
 net_applet &
 
-#Re-disabling unnecessary content
+#Re-disabling unnecessary sercices
 systemctl disable ModemManager.service
 systemctl disable NetworkManager-wait-online.service
 systemctl disable lvm2-monitor.service
