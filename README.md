@@ -12,7 +12,7 @@ killall -KILL net_applet nm-applet
 systemctl stop network.service
 systemctl disable network.service
 
-#Diasable net_applet.desktop, Enable all nm-applet's
+#Disable net_applet.desktop, Enable all nm-applet's
 rename -v \.desktop.bak \.desktop $(find /etc/xdg/autostart/* -name '*nm-applet.desktop.bak')
 mv -f /etc/xdg/autostart/net_applet.desktop /etc/xdg/autostart/net_applet.desktop.bak
 
@@ -39,7 +39,7 @@ killall -KILL nm-applet net_applet
 systemctl stop NetworkManager.service
 systemctl disable NetworkManager.service
 
-#Diasable all nm-applet's, Enable net_applet.desktop (rename)
+#Disable all nm-applet's, Enable net_applet.desktop (rename)
 rename -v \.desktop \.desktop.bak $(find /etc/xdg/autostart/* -name '*nm-applet.desktop')
 mv -f /etc/xdg/autostart/net_applet.desktop.bak /etc/xdg/autostart/net_applet.desktop
 
@@ -48,7 +48,7 @@ systemctl enable network.service
 systemctl start network.service
 net_applet &
 
-#Re-disabling unnecessary sercices
+#Re-disabling unnecessary services
 systemctl disable ModemManager.service
 systemctl disable NetworkManager-wait-online.service
 systemctl disable lvm2-monitor.service
