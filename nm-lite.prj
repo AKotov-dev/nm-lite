@@ -12,7 +12,9 @@ group=Applications/File
 
 [DESCRIPTION]
 0=Switch network/net_applet to NetworkManager/nm-applet (during installation)
-1=and back (during removal) + disable unnecessary services to speed up system loading
+1=and back (during removal) + disable unnecessary services to speed up system loading.
+2=
+3=URL: https://github.com/AKotov-dev/nm-lite
 
 [MAINTAINER]
 maintainer=Alex Kotov
@@ -24,7 +26,7 @@ vendor=alex_q_2000 (C) 2021
 summary=Switch from network/net_applet to NetworkManager/nm-applet
 
 [URLCOPY]
-urlcopy=111
+urlcopy=https://github.com/AKotov-dev/nm-lite
 
 [LICENSE]
 license=GPLv3
