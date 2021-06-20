@@ -32,6 +32,11 @@ systemctl disable NetworkManager-wait-online.service
 systemctl disable lvm2-monitor.service
 systemctl disable avahi-daemon.service
 
+#Disable program RAID & monitoring
+systemctl disable mdadm.service
+systemctl disable mdmonitor.service
+systemctl disable mdmonitor-takeover.service
+
 exit 0;
 ```
 
@@ -58,6 +63,11 @@ systemctl disable ModemManager.service
 systemctl disable NetworkManager-wait-online.service
 systemctl disable lvm2-monitor.service
 systemctl disable avahi-daemon.service
+
+#Disable program RAID & monitoring
+systemctl disable mdadm.service
+systemctl disable mdmonitor.service
+systemctl disable mdmonitor-takeover.service
 
 exit 0;
 ```
