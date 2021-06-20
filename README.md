@@ -10,7 +10,7 @@ Note: To display the nm-applet icon in KDE and GNOME, you need to comment out a 
 
 Сomparison of system loading speed:
 --
-network/net_allet
+network/net_applet
 ```
 > systemd-analyze
 Startup finished in 8.257s (firmware) + 4.259s (loader) + 4.122s (kernel) + 33.652s (userspace) = 50.292s 
