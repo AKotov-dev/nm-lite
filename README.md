@@ -8,9 +8,24 @@ Note: To display the nm-applet icon in KDE and GNOME, you need to comment out a 
 
 Примечание: Для отображения значка nm-applet в KDE и GNOME нужно закомментировать строку в файле /etc/xdg/autostart/nm-applet.desktop: `#NotShowIn=KDE;GNOME;`
 
+Сomparison of system loading speed with...
+--
+network/net_allet
+```
+> systemd-analyze
+Startup finished in 8.257s (firmware) + 4.259s (loader) + 4.122s (kernel) + 33.652s (userspace) = 50.292s 
+graphical.target reached after 33.643s in userspace
+```
+nm-lite
+```
+> systemd-analyze
+Startup finished in 8.262s (firmware) + 3.134s (loader) + 4.577s (kernel) + 33.524s (userspace) = 49.498s 
+graphical.target reached after 33.512s in userspace
+```
 %post
 --
-```#!/bin/bash
+```
+#!/bin/bash
 
 #Disable network.service & net_applet, Enable NetworkManager lite
 killall -KILL net_applet nm-applet
@@ -42,7 +57,8 @@ exit 0;
 
 %postun
 --
-```#!/bin/bash
+```
+#!/bin/bash
 
 #Disable NetworkManager, Enable network & net_applet
 killall -KILL nm-applet net_applet
