@@ -8,7 +8,7 @@ Note: To display the nm-applet icon in KDE and GNOME, you need to comment out a 
 
 Примечание: Для отображения значка nm-applet в KDE и GNOME нужно закомментировать строку в файле /etc/xdg/autostart/nm-applet.desktop: `#NotShowIn=KDE;GNOME;`
 
-Сomparison of system loading speed with...
+Сomparison of system loading speed:
 --
 network/net_allet
 ```
