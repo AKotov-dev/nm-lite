@@ -39,13 +39,13 @@ mv -f /etc/xdg/autostart/net_applet.desktop /etc/xdg/autostart/net_applet.deskto
 #Enable NetworkManager
 systemctl enable NetworkManager.service
 systemctl start NetworkManager.service
+#systemctl enable NetworkManager-wait-online.service
 nm-applet &
 
 #Speeding up system loading
 systemctl disable ModemManager.service
-systemctl disable NetworkManager-wait-online.service
 systemctl disable lvm2-monitor.service
-systemctl disable avahi-daemon.service
+#systemctl disable avahi-daemon.service
 
 #Disable program RAID & monitoring
 systemctl disable mdadm.service
@@ -64,6 +64,7 @@ exit 0;
 killall -KILL nm-applet net_applet
 systemctl stop NetworkManager.service
 systemctl disable NetworkManager.service
+#systemctl disable NetworkManager-wait-online.service
 
 #Disable all nm-applet's, Enable net_applet.desktop (rename)
 rename -v \.desktop \.desktop.bak $(find /etc/xdg/autostart/* -name '*nm-applet.desktop')
@@ -76,9 +77,8 @@ net_applet &
 
 #Re-disabling unnecessary services
 systemctl disable ModemManager.service
-systemctl disable NetworkManager-wait-online.service
 systemctl disable lvm2-monitor.service
-systemctl disable avahi-daemon.service
+#systemctl disable avahi-daemon.service
 
 #Disable program RAID & monitoring
 systemctl disable mdadm.service

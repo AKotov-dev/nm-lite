@@ -2,10 +2,10 @@
 name=nm-lite
 
 [VERSION]
-version=0.1
+version=0.2
 
 [RELEASE]
-release=2.mrx8
+release=0.mrx8
 
 [GROUP]
 group=Applications/File
@@ -61,13 +61,13 @@ deb=0
 11=#Enable NetworkManager
 12=systemctl enable NetworkManager.service
 13=systemctl start NetworkManager.service
-14=nm-applet &
-15=
-16=#Speeding up system loading
-17=systemctl disable ModemManager.service
-18=systemctl disable NetworkManager-wait-online.service
+14=systemctl enable NetworkManager-wait-online.service
+15=nm-applet &
+16=
+17=#Speeding up system loading
+18=systemctl disable ModemManager.service
 19=systemctl disable lvm2-monitor.service
-20=systemctl disable avahi-daemon.service
+20=#systemctl disable avahi-daemon.service
 21=
 22=#Disable program RAID & monitoring
 23=systemctl disable mdadm.service
@@ -83,21 +83,21 @@ deb=0
 3=killall -KILL nm-applet net_applet
 4=systemctl stop NetworkManager.service
 5=systemctl disable NetworkManager.service
-6=
-7=#Disable all nm-applet's, Enable net_applet.desktop (rename)
-8=rename -v \.desktop \.desktop.bak $(find /etc/xdg/autostart/* -name '*nm-applet.desktop')
-9=mv -f /etc/xdg/autostart/net_applet.desktop.bak /etc/xdg/autostart/net_applet.desktop
-10=
-11=#Return to network & net_applet
-12=systemctl enable network.service
-13=systemctl start network.service
-14=net_applet &
-15=
-16=#Re-disabling unnecessary services
-17=systemctl disable ModemManager.service
-18=systemctl disable NetworkManager-wait-online.service
+6=systemctl disable NetworkManager-wait-online.service
+7=
+8=#Disable all nm-applet's, Enable net_applet.desktop (rename)
+9=rename -v \.desktop \.desktop.bak $(find /etc/xdg/autostart/* -name '*nm-applet.desktop')
+10=mv -f /etc/xdg/autostart/net_applet.desktop.bak /etc/xdg/autostart/net_applet.desktop
+11=
+12=#Return to network & net_applet
+13=systemctl enable network.service
+14=systemctl start network.service
+15=net_applet &
+16=
+17=#Re-disabling unnecessary services
+18=systemctl disable ModemManager.service
 19=systemctl disable lvm2-monitor.service
-20=systemctl disable avahi-daemon.service
+20=#systemctl disable avahi-daemon.service
 21=
 22=#Disable program RAID & monitoring
 23=systemctl disable mdadm.service
