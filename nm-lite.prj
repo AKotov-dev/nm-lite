@@ -2,10 +2,10 @@
 name=nm-lite
 
 [VERSION]
-version=0.2
+version=0.3
 
 [RELEASE]
-release=0.mrx8
+release=0.mrx9
 
 [GROUP]
 group=Applications/File
@@ -40,9 +40,6 @@ meta=1
 [NOARCH]
 noarch=1
 
-[SIGN]
-sign=0
-
 [DEB]
 deb=0
 
@@ -53,64 +50,66 @@ deb=0
 3=killall -KILL net_applet nm-applet
 4=systemctl stop network.service
 5=systemctl disable network.service
-6=
-7=#Disable net_applet.desktop, Enable all nm-applet's
-8=rename -v \.desktop.bak \.desktop $(find /etc/xdg/autostart/* -name '*nm-applet.desktop.bak')
-9=mv -f /etc/xdg/autostart/net_applet.desktop /etc/xdg/autostart/net_applet.desktop.bak
-10=
-11=#Enable NetworkManager
-12=systemctl enable NetworkManager.service
-13=systemctl start NetworkManager.service
-14=systemctl enable NetworkManager-wait-online.service
-15=nm-applet &
-16=
-17=#Speeding up system loading
-18=systemctl disable ModemManager.service
-19=systemctl disable lvm2-monitor.service
-20=#systemctl disable avahi-daemon.service
-21=
-22=#Disable program RAID & monitoring
-23=systemctl disable mdadm.service
-24=systemctl disable mdmonitor.service
-25=systemctl disable mdmonitor-takeover.service
+6=systemctl disable network-up
+7=
+8=#Disable net_applet.desktop, Enable all nm-applet's
+9=rename -v \.desktop.bak \.desktop $(find /etc/xdg/autostart/* -name '*nm-applet.desktop.bak')
+10=mv -f /etc/xdg/autostart/net_applet.desktop /etc/xdg/autostart/net_applet.desktop.bak
+11=
+12=#Show nm-applet in all DE
+13=sed -i 's/^NotShowIn*/#NotShowIn/' /etc/xdg/autostart/nm-applet.desktop
+14=
+15=#Enable NetworkManager
+16=systemctl enable NetworkManager.service
+17=systemctl start NetworkManager.service
+18=#systemctl enable NetworkManager-wait-online.service
+19=nm-applet &
+20=
+21=#Speeding up system loading
+22=systemctl disable lvm2-monitor.service
+23=systemctl disable avahi-daemon.service
+24=systemctl disable ModemManager.service
+25=systemctl disable NetworkManager-wait-online.service
 26=
-27=exit 0;
+27=#Disable program RAID & monitoring
+28=systemctl disable mdadm.service
+29=systemctl disable mdmonitor.service
+30=systemctl disable mdmonitor-takeover.service
 
 [AFTERREMOVE]
 0=#!/bin/bash
 1=
-2=#Disable NetworkManager, Enable network & net_applet
-3=killall -KILL nm-applet net_applet
-4=systemctl stop NetworkManager.service
-5=systemctl disable NetworkManager.service
-6=systemctl disable NetworkManager-wait-online.service
-7=
-8=#Disable all nm-applet's, Enable net_applet.desktop (rename)
-9=rename -v \.desktop \.desktop.bak $(find /etc/xdg/autostart/* -name '*nm-applet.desktop')
-10=mv -f /etc/xdg/autostart/net_applet.desktop.bak /etc/xdg/autostart/net_applet.desktop
-11=
-12=#Return to network & net_applet
-13=systemctl enable network.service
-14=systemctl start network.service
-15=net_applet &
-16=
-17=#Re-disabling unnecessary services
-18=systemctl disable ModemManager.service
-19=systemctl disable lvm2-monitor.service
-20=#systemctl disable avahi-daemon.service
-21=
-22=#Disable program RAID & monitoring
-23=systemctl disable mdadm.service
-24=systemctl disable mdmonitor.service
-25=systemctl disable mdmonitor-takeover.service
-26=
-27=exit 0;
+2=#Если удаление
+3=if [ $1 -eq 0 ]; then
+4=#Disable NetworkManager, Enable network & net_applet
+5=killall -KILL nm-applet net_applet
+6=systemctl stop NetworkManager.service
+7=systemctl disable NetworkManager.service
+8=systemctl disable NetworkManager-wait-online.service
+9=
+10=#Disable all nm-applet's, Enable net_applet.desktop (rename)
+11=rename -v \.desktop \.desktop.bak $(find /etc/xdg/autostart/* -name '*nm-applet.desktop')
+12=mv -f /etc/xdg/autostart/net_applet.desktop.bak /etc/xdg/autostart/net_applet.desktop
+13=
+14=#Return to network & net_applet
+15=systemctl enable network-up
+16=systemctl enable network.service
+17=systemctl start network.service
+18=net_applet &
+19=
+20=#Re-disabling unnecessary services
+21=systemctl disable ModemManager.service
+22=systemctl disable lvm2-monitor.service
+23=#systemctl disable avahi-daemon.service
+24=
+25=#Disable program RAID & monitoring
+26=systemctl disable mdadm.service
+27=systemctl disable mdmonitor.service
+28=systemctl disable mdmonitor-takeover.service
+29=fi;
 
 [URL32]
 url32=
-
-[URL64]
-url64=
 
 [PROGRAMNAME]
 programname=
