@@ -31,10 +31,14 @@ graphical.target reached after 33.512s in userspace
 killall -KILL net_applet nm-applet
 systemctl stop network.service
 systemctl disable network.service
+systemctl disable network-up
 
 #Disable net_applet.desktop, Enable all nm-applet's
 rename -v \.desktop.bak \.desktop $(find /etc/xdg/autostart/* -name '*nm-applet.desktop.bak')
 mv -f /etc/xdg/autostart/net_applet.desktop /etc/xdg/autostart/net_applet.desktop.bak
+
+#Show nm-applet in all DE
+sed -i 's/^NotShowIn*/#NotShowIn/' /etc/xdg/autostart/nm-applet.desktop
 
 #Enable NetworkManager
 systemctl enable NetworkManager.service
@@ -43,16 +47,15 @@ systemctl start NetworkManager.service
 nm-applet &
 
 #Speeding up system loading
-systemctl disable ModemManager.service
 systemctl disable lvm2-monitor.service
-#systemctl disable avahi-daemon.service
+systemctl disable avahi-daemon.service
+systemctl disable ModemManager.service
+systemctl disable NetworkManager-wait-online.service
 
 #Disable program RAID & monitoring
 systemctl disable mdadm.service
 systemctl disable mdmonitor.service
 systemctl disable mdmonitor-takeover.service
-
-exit 0;
 ```
 
 %postun
@@ -60,17 +63,20 @@ exit 0;
 ```
 #!/bin/bash
 
+#Если удаление
+if [ $1 -eq 0 ]; then
 #Disable NetworkManager, Enable network & net_applet
 killall -KILL nm-applet net_applet
 systemctl stop NetworkManager.service
 systemctl disable NetworkManager.service
-#systemctl disable NetworkManager-wait-online.service
+systemctl disable NetworkManager-wait-online.service
 
 #Disable all nm-applet's, Enable net_applet.desktop (rename)
 rename -v \.desktop \.desktop.bak $(find /etc/xdg/autostart/* -name '*nm-applet.desktop')
 mv -f /etc/xdg/autostart/net_applet.desktop.bak /etc/xdg/autostart/net_applet.desktop
 
 #Return to network & net_applet
+systemctl enable network-up
 systemctl enable network.service
 systemctl start network.service
 net_applet &
@@ -84,6 +90,5 @@ systemctl disable lvm2-monitor.service
 systemctl disable mdadm.service
 systemctl disable mdmonitor.service
 systemctl disable mdmonitor-takeover.service
-
-exit 0;
+fi;
 ```
