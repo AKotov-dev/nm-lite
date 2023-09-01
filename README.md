@@ -81,7 +81,7 @@ systemctl mask network.service network-up.service
 systemctl enable network-up
 systemctl enable network.service
 systemctl start network.service
-# net_applet & Logout required
+#net_applet & Logout required
 
 #Re-disabling unnecessary services
 systemctl disable ModemManager.service
