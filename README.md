@@ -1,12 +1,12 @@
 # nm-lite
 The switch `network/net_applet` to `NetworkManager/nm-applet` (after installation) and back (after removal) + disable unnecessary services to speed up system loading.
 
-Note: To display the nm-applet icon in KDE and GNOME, you need to comment out a line in the file /etc/xdg/autostart/nm-applet.desktop: `#NotShowIn=KDE;GNOME;`
+Note: To apply the changes, logout or reboot.
 
 
 Переключатель `network/net_applet` на `NetworkManager/nm-applet` (после установки) и обратно (после удаления) + отключение ненужных служб для ускорения загрузки системы.
 
-Примечание: Для отображения значка nm-applet в KDE и GNOME нужно закомментировать строку в файле /etc/xdg/autostart/nm-applet.desktop: `#NotShowIn=KDE;GNOME;`
+Примечание: Для применения изменений сделайте логаут или перезагрузитесь.
 
 Сomparison of system loading speed:
 --
@@ -32,6 +32,7 @@ killall -KILL net_applet nm-applet
 systemctl stop network.service
 systemctl disable network.service
 systemctl disable network-up
+systemctl mask network.service network-up.service
 
 #Disable net_applet.desktop, Enable all nm-applet's
 rename -v \.desktop.bak \.desktop $(find /etc/xdg/autostart/* -name '*nm-applet.desktop.bak')
@@ -44,7 +45,7 @@ sed -i 's/^NotShowIn*/#NotShowIn/' /etc/xdg/autostart/nm-applet.desktop
 systemctl enable NetworkManager.service
 systemctl start NetworkManager.service
 #systemctl enable NetworkManager-wait-online.service
-nm-applet &
+nm-applet & Logout required
 
 #Speeding up system loading
 systemctl disable lvm2-monitor.service
@@ -76,10 +77,11 @@ rename -v \.desktop \.desktop.bak $(find /etc/xdg/autostart/* -name '*nm-applet.
 mv -f /etc/xdg/autostart/net_applet.desktop.bak /etc/xdg/autostart/net_applet.desktop
 
 #Return to network & net_applet
+systemctl mask network.service network-up.service
 systemctl enable network-up
 systemctl enable network.service
 systemctl start network.service
-net_applet &
+# net_applet & Logout required
 
 #Re-disabling unnecessary services
 systemctl disable ModemManager.service
