@@ -45,7 +45,7 @@ sed -i 's/^NotShowIn*/#NotShowIn/' /etc/xdg/autostart/nm-applet.desktop
 systemctl enable NetworkManager.service
 systemctl start NetworkManager.service
 #systemctl enable NetworkManager-wait-online.service
-nm-applet & Logout required
+#nm-applet & Logout required
 
 #Speeding up system loading
 systemctl disable lvm2-monitor.service
