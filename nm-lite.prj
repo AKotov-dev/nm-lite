@@ -44,39 +44,42 @@ deb=0
 [AFTERINSTALL]
 0=#!/bin/bash
 1=
-2=#Disable network.service & net_applet, Enable NetworkManager lite
-3=killall -KILL net_applet nm-applet
-4=systemctl stop network.service
-5=systemctl disable network.service
-6=systemctl disable network-up
-7=systemctl mask network.service network-up.service
-8=
-9=#Disable net_applet.desktop, Enable all nm-applet's
-10=rename -v \.desktop.bak \.desktop $(find /etc/xdg/autostart/* -name '*nm-applet.desktop.bak')
-11=mv -f /etc/xdg/autostart/net_applet.desktop /etc/xdg/autostart/net_applet.desktop.bak
-12=#Hide in Budgie menu
-13=echo "NotShowIn=Budgie;" >> /usr/share/applications/net_applet.desktop
-14=echo "NotShowIn=Budgie;" >> /usr/share/applications/draknetcenter.desktop
-15=
-16=#Show nm-applet in all DE
-17=sed -i 's/^NotShowIn*/#NotShowIn/' /etc/xdg/autostart/nm-applet.desktop
-18=
-19=#Enable NetworkManager
-20=systemctl enable NetworkManager.service
-21=systemctl start NetworkManager.service
-22=systemctl enable NetworkManager-wait-online.service
-23=#nm-applet & Logout required
-24=
-25=#Speeding up system loading
-26=systemctl disable lvm2-monitor.service
-27=systemctl disable avahi-daemon.service
-28=systemctl disable ModemManager.service
-29=#systemctl disable NetworkManager-wait-online.service
-30=
-31=#Disable program RAID & monitoring
-32=systemctl disable mdadm.service
-33=systemctl disable mdmonitor.service
-34=systemctl disable mdmonitor-takeover.service
+2=#Установка или апгрейд
+3=if [ $1 -ge 1 ]; then
+4=#Disable network.service & net_applet, Enable NetworkManager lite
+5=killall -KILL net_applet nm-applet
+6=systemctl stop network.service
+7=systemctl disable network.service
+8=systemctl disable network-up
+9=systemctl mask network.service network-up.service
+10=
+11=#Disable net_applet.desktop, Enable all nm-applet's
+12=rename -v \.desktop.bak \.desktop $(find /etc/xdg/autostart/* -name '*nm-applet.desktop.bak')
+13=mv -f /etc/xdg/autostart/net_applet.desktop /etc/xdg/autostart/net_applet.desktop.bak
+14=#Hide in Budgie menu
+15=echo "NotShowIn=Budgie;" >> /usr/share/applications/net_applet.desktop
+16=echo "NotShowIn=Budgie;" >> /usr/share/applications/draknetcenter.desktop
+17=
+18=#Show nm-applet in all DE
+19=sed -i 's/^NotShowIn*/#NotShowIn/' /etc/xdg/autostart/nm-applet.desktop
+20=
+21=#Enable NetworkManager
+22=systemctl enable NetworkManager.service
+23=systemctl start NetworkManager.service
+24=systemctl enable NetworkManager-wait-online.service
+25=#nm-applet & Logout required
+26=
+27=#Speeding up system loading
+28=systemctl disable lvm2-monitor.service
+29=systemctl disable avahi-daemon.service
+30=systemctl disable ModemManager.service
+31=#systemctl disable NetworkManager-wait-online.service
+32=
+33=#Disable program RAID & monitoring
+34=systemctl disable mdadm.service
+35=systemctl disable mdmonitor.service
+36=systemctl disable mdmonitor-takeover.service
+37=fi;
 
 [AFTERREMOVE]
 0=#!/bin/bash
