@@ -37,6 +37,9 @@ systemctl mask network.service network-up.service
 #Disable net_applet.desktop, Enable all nm-applet's
 rename -v \.desktop.bak \.desktop $(find /etc/xdg/autostart/* -name '*nm-applet.desktop.bak')
 mv -f /etc/xdg/autostart/net_applet.desktop /etc/xdg/autostart/net_applet.desktop.bak
+#Hide in Budgie menu
+echo "NotShowIn=Budgie;" >> /usr/share/applications/net_applet.desktop
+echo "NotShowIn=Budgie;" >> /usr/share/applications/draknetcenter.desktop
 
 #Show nm-applet in all DE
 sed -i 's/^NotShowIn*/#NotShowIn/' /etc/xdg/autostart/nm-applet.desktop
@@ -44,14 +47,14 @@ sed -i 's/^NotShowIn*/#NotShowIn/' /etc/xdg/autostart/nm-applet.desktop
 #Enable NetworkManager
 systemctl enable NetworkManager.service
 systemctl start NetworkManager.service
-#systemctl enable NetworkManager-wait-online.service
+systemctl enable NetworkManager-wait-online.service
 #nm-applet & Logout required
 
 #Speeding up system loading
 systemctl disable lvm2-monitor.service
 systemctl disable avahi-daemon.service
 systemctl disable ModemManager.service
-systemctl disable NetworkManager-wait-online.service
+#systemctl disable NetworkManager-wait-online.service
 
 #Disable program RAID & monitoring
 systemctl disable mdadm.service
@@ -75,9 +78,12 @@ systemctl disable NetworkManager-wait-online.service
 #Disable all nm-applet's, Enable net_applet.desktop (rename)
 rename -v \.desktop \.desktop.bak $(find /etc/xdg/autostart/* -name '*nm-applet.desktop')
 mv -f /etc/xdg/autostart/net_applet.desktop.bak /etc/xdg/autostart/net_applet.desktop
+#Show in main menu
+sed -i '/NotShowIn=Budgie;/d' /usr/share/applications/net_applet.desktop
+sed -i '/NotShowIn=Budgie;/d' /usr/share/applications/draknetcenter.desktop
 
 #Return to network & net_applet
-systemctl mask network.service network-up.service
+systemctl unmask network.service network-up.service
 systemctl enable network-up
 systemctl enable network.service
 systemctl start network.service
