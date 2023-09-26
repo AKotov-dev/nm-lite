@@ -2,7 +2,7 @@
 name=nm-lite
 
 [VERSION]
-version=0.5
+version=0.6
 
 [RELEASE]
 release=0.mrx9
@@ -64,14 +64,14 @@ deb=0
 19=#Enable NetworkManager
 20=systemctl enable NetworkManager.service
 21=systemctl start NetworkManager.service
-22=#systemctl enable NetworkManager-wait-online.service
+22=systemctl enable NetworkManager-wait-online.service
 23=#nm-applet & Logout required
 24=
 25=#Speeding up system loading
 26=systemctl disable lvm2-monitor.service
 27=systemctl disable avahi-daemon.service
 28=systemctl disable ModemManager.service
-29=systemctl disable NetworkManager-wait-online.service
+29=#systemctl disable NetworkManager-wait-online.service
 30=
 31=#Disable program RAID & monitoring
 32=systemctl disable mdadm.service
